@@ -3,7 +3,7 @@
     "paes": [
       {
         "id": 1,
-        "tipo": "Italiano Branco"
+        "tipo": "Tradicional"
       },
       {
         "id": 2,
@@ -18,8 +18,8 @@
         "tipo": "Integral"
       },
       {
-        "id":5,
-        "tipo": "Tradicional"
+        "id": 5,
+        "tipo": "Italiano Branco"
       }
     ],
     "carnes": [
@@ -81,5 +81,44 @@
       "tipo": "Finalizado"
     }
   ],
-  "burgers": []
+  "burgers": [
+    {
+      "nome": "Rhama Krisner",
+      "carne": "Alcatra",
+      "pao": "Tradicional",
+      "opcionais": [
+        "Bacon",
+        "Salame",
+        "Tomate"
+      ],
+      "status": "Solicitado",
+      "id": 1
+    },
+    {
+      "nome": "Dona Cidinha",
+      "carne": "Picanha",
+      "pao": "Parmesão e Orégano",
+      "opcionais": [
+        "Bacon",
+        "Salame",
+        "Cheddar",
+        "Tomate",
+        "Pepino"
+      ],
+      "status": "Solicitado",
+      "id": 2
+    },
+    {
+      "nome": "Zé",
+      "carne": "Veggie burger",
+      "pao": "Integral",
+      "opcionais": [
+        "Pepino",
+        "Tomate",
+        "Cebola roxa"
+      ],
+      "status": "Solicitado",
+      "id": 3
+    }
+  ]
 }
