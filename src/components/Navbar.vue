@@ -5,6 +5,7 @@
 		</router-link>
 		<router-link to="/">Inicio</router-link> 
 		<router-link to="/pedidos">Pedidos</router-link>
+		<router-link to="/teste">Teste</router-link>
 	</div>
 </template>
 

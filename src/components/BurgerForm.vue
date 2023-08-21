@@ -1,11 +1,13 @@
 <template>
 	<div>
-		<p>Componente de mensagem</p>
+		<!-- <message :msg="msg" v-show="msg"  class="message"></message> -->
 		<div>
 			<form id="burger-form" @submit="createdBurger">
 				<div class="input-container">
 					<label for="nome">Nome do Cliente: </label>
 					<input
+						class="form-control"
+						autocomplete="off"
 						type="text"
 						id="nome"
 						name="nome"
@@ -13,10 +15,15 @@
 						placeholder="Digite o seu nome"
 					/>
 				</div>
-				<div class="input-container">
+				<div class="mb-3 input-container">
 					<label for="pao">Escolha o pão: </label>
-					<select name="pao" id="pao" v-model="pao">
-						<option value="Selecione o seu pão" />
+					<select
+						class="form-select"
+						name="pao"
+						id="pao"
+						v-model="pao"
+					>
+						<option value="Selecione o seu pão"></option>
 						<option
 							v-for="pao in paes"
 							:key="pao.id"
@@ -26,9 +33,14 @@
 						</option>
 					</select>
 				</div>
-				<div class="input-container">
+				<div class="mb-3 input-container">
 					<label for="carne">Escolha a carne: </label>
-					<select name="carne" id="carne" v-model="carne">
+					<select
+						class="form-select"
+						name="carne"
+						id="carne"
+						v-model="carne"
+					>
 						<option value="Selecione o tipo de carne" />
 						<option
 							v-for="carne in carnes"
@@ -50,10 +62,12 @@
 						:key="opcional.id"
 					>
 						<input
+							class="form-check"
 							type="checkbox"
 							name="opcionais"
 							v-model="opcionais"
 							:value="opcional.tipo"
+							@click="toast"
 						/>
 						<span>{{ opcional.tipo }}</span>
 					</div>
@@ -64,6 +78,7 @@
 						type="submit"
 						class="submit-btn"
 						value="Criar meu Burger"
+						@click="notificacao"
 					/>
 				</div>
 			</form>
@@ -72,8 +87,13 @@
 </template>
 
 <script>
+import Message from './Message.vue';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+
 export default {
     name: "BurgerForm",
+
     data() {
         return {
             paes: null,
@@ -87,6 +107,14 @@ export default {
         }
     },
     methods: {
+		notify(message) {
+			toast.success(message, {
+				autoClose: 2000,
+				position: 'top-center',
+				closeButton: false,
+			})
+		},
+
         async getIngredientes(){
             const req = await fetch('http://localhost:3000/ingredientes');
             const data = await req.json();
@@ -117,6 +145,11 @@ export default {
 
             const res = await req.json();
 
+			//mensagem do toast
+			this.msg = `Pedido N°${res.id} realizado com sucesso`
+
+			const notificacao = this.notify(this.msg)
+
             console.log(res)
 
             //Limpar os campos
@@ -124,11 +157,14 @@ export default {
             this.carne = "";
             this.pao = "";
             this.opcionais = "";
-        }
+        },
     },
     mounted() {
         this.getIngredientes()
     },
+	components:{
+		Message
+	}
 }
 </script>
 
@@ -200,5 +236,16 @@ export default {
 		background-color: #fcba03;
 		color: #222;
 		border: 2px solid #fcba03;
+	}
+
+	.message {
+		transition: opacity 5s; /* Define a duração da transição para 5 segundos */
+		opacity: 1; /* Começa totalmente visível */
+	}
+
+	.message-leave-active {
+		/* Define o estado ativo da transição de saída */
+		transition: opacity 5s;
+		opacity: 0; /* Gradualmente torna-se invisível */
 	}
 </style>

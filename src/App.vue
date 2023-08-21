@@ -1,13 +1,14 @@
 <template>
 	<navbar :logo="logo_src" :alt="app_name"/>
 	<router-view />
-
+  
 	<Footer />
 </template>
 
 <script>
 import Footer from './components/Footer.vue'
 import Navbar from "./components/Navbar.vue"
+
 
 export default{  
 	components: { Navbar, Footer},
@@ -16,6 +17,9 @@ export default{
       logo_src:"/img/logo.png",
       app_name: "Monte o seu Hamburguer"
     }
+  },
+  mounted() {
+    
   },
 
 }
